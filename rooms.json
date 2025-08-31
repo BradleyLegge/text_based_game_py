@@ -1,0 +1,7 @@
+{
+    "start_room": "starting room",
+    "hallway": "this is the hallway",
+    "east_room": "this room is to the left",
+    "west_room": "this room is to the right",
+    "north_room": "this room is north of the starting room"
+}
