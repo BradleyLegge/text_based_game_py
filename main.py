@@ -14,27 +14,15 @@ def read_file():
 
 def main():
     data = read_file()
+    
 
-    print(data["start_room"])
+    print(data[0]["start_room"])
     print("Directions: n for north, e for east, s for south, w for west")
-    print("Where would you like to go?")
-    move_room(data)
+    user_input = input("Where would you like to go? ==> ")
     
-
-def move_room(data):
-    move = input("==> ")
-    
-    if move == "n":
+    if user_input in data["exits"]:
         print(data["hallway"])
-    elif move == "s":
-        print("Cannot move this way")
-    elif move == "w":
-        print("Cannot move this way")
-    elif move == "e":
-        print("Cannot move this way")
-    
-
-
+    else: print("you cannot move that way!")
 
 if __name__ == "__main__":
     main()
