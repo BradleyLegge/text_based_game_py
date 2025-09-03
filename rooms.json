@@ -12,5 +12,24 @@
       "south": "start_room",
       "west": "room_one"
     }
+  },
+  "ballroom": {
+    "description": "You are in the ballroom.",
+    "exits": {
+      "north": "boss_room",
+      "south": "hallway"
+    }
+  },
+  "room_one": {
+    "description": "You are in room one.",
+    "exits": {
+      "east": "hallway"
+    }
+  },
+  "boss_room": {
+    "description": "You are in the bosses room.",
+    "exits": {
+      "south": "ballroom"
+    }
   }
 }
