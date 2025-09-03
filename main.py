@@ -14,15 +14,21 @@ def read_file():
 
 def main():
     data = read_file()
-    
+    lst = []
+    current_room = "start_room"
 
-    print(data[0]["start_room"])
-    print("Directions: n for north, e for east, s for south, w for west")
-    user_input = input("Where would you like to go? ==> ")
-    
-    if user_input in data["exits"]:
-        print(data["hallway"])
-    else: print("you cannot move that way!")
+    print(data["start_room"]["description"])
+    for i in data["start_room"]["exits"]:
+        lst.append(i)
+    print(f"These are the exits: {" ".join(lst)}")
+    print("What would you like to do?")
+    user_input = input("==> ")
+
+    if user_input in data[current_room]["exits"]:
+        current_room = data[current_room]["exits"][user_input]
+        print(f"You are in {current_room}")
+    else: print("Outside")
+
 
 if __name__ == "__main__":
     main()

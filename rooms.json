@@ -1,18 +1,16 @@
-[
-  {
-    "start_room": "You are in the starting room",
-    "exits": ["north"]
+{
+  "start_room": {
+    "description": "You are in the starting room",
+    "exits": {
+      "north": "hallway"
+    }
   },
-  {
-    "hallway": "You are now in a hallway. There is another hallway to the east and a room with a door to the west.",
-    "exits": ["north, south, east, west"]
-  },
-  {
-    "west_room_1": "You enter a room with a chest in the western corner.",
-    "exits": ["east"]
-  },
-  {
-    "east_hallway": "This hallway leads you to a dead end.",
-    "exits": ["west"]
+  "hallway": {
+    "description": "You are in the hallway.",
+    "exits": {
+      "north": "ballroom",
+      "south": "start_room",
+      "west": "room_one"
+    }
   }
-]
+}
