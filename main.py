@@ -14,19 +14,25 @@ def read_file():
         print(f"An unexpected error occurred: {e}")
 
 rooms = read_file()
-lst = []
 
 def main():
-    current_room = "start_room"
-    game_start(Person("Brad"))
-    
     game_start()
-    room_exits(current_room)
 
-def game_start(player):
-    print(f"Welcome {player.name} to The Game! Travel from room to room collecting loot and find the key to unlock "
-    "the boss room. If you are brave enough fight the boss and collect the ultimate prize!")
-    print(f"Enter 'm' or 'M' to view the menu.")
+def game_start():
+    print(f"Welcome to The Game!")
+    print("Menu")
+    print("New Game ('n' or 'N')")
+    print("Saved Game ('s' or 'S')")
+    new_or_saved_game(input("==> "))
+
+def new_or_saved_game(user_input):
+    if user_input.lower() == 'n':
+        print("New Game loaded")
+        # current_room = "start_room"
+        room_exits("start_room")
+    elif user_input.lower() == 's':
+        print("Saved Game loaded")
+    else: print("Bad input")
 
 def room_exits(current_room):        
     print(rooms[current_room]["description"])
@@ -38,11 +44,15 @@ def room_exits(current_room):
 
 def valid_room(user_input, current_room):
     if user_input in rooms[current_room]["exits"]:
-        current_room == rooms[current_room]["exits"][user_input]
+        current_room = rooms[current_room]["exits"][user_input]
+        # print(current_room)
         room_exits(current_room)
-    elif user_input == 'm' or 'M':
-        player.player_status()
+    # elif user_input == 'm' or 'M':
+    #     player.player_status()
         
+def player_status(user_input, player):
+    if user_input == 'm' or 'M':
+        player.player_status()
 
 if __name__ == "__main__":
     main()
