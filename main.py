@@ -2,8 +2,6 @@ import json
 from models.player import Person
 file_path = "rooms.json"
 
-player = Person("Brad")
-
 def read_file():
     try:
         with open(file_path, "r") as file:
@@ -20,11 +18,12 @@ lst = []
 
 def main():
     current_room = "start_room"
+    game_start(Person("Brad"))
     
     game_start()
     room_exits(current_room)
 
-def game_start():
+def game_start(player):
     print(f"Welcome {player.name} to The Game! Travel from room to room collecting loot and find the key to unlock "
     "the boss room. If you are brave enough fight the boss and collect the ultimate prize!")
     print(f"Enter 'm' or 'M' to view the menu.")
