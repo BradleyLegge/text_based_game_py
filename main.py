@@ -1,5 +1,8 @@
 import json
+from models.player import Person
 file_path = "rooms.json"
+
+player = Person("Brad")
 
 def read_file():
     try:
@@ -22,8 +25,9 @@ def main():
     room_exits(current_room)
 
 def game_start():
-    print("Welcome to The Game! Travel from room to room collecting loot and find the key to unlock "
+    print(f"Welcome {player.name} to The Game! Travel from room to room collecting loot and find the key to unlock "
     "the boss room. If you are brave enough fight the boss and collect the ultimate prize!")
+    print(f"Enter 'm' or 'M' to view the menu.")
 
 def room_exits(current_room):        
     print(rooms[current_room]["description"])
@@ -35,8 +39,10 @@ def room_exits(current_room):
 
 def valid_room(user_input, current_room):
     if user_input in rooms[current_room]["exits"]:
-        current_room = rooms[current_room]["exits"][user_input]
+        current_room == rooms[current_room]["exits"][user_input]
         room_exits(current_room)
+    elif user_input == 'm' or 'M':
+        player.player_status()
         
 
 if __name__ == "__main__":
