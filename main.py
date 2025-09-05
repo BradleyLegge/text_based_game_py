@@ -1,4 +1,5 @@
 import json
+import random
 from models.player import Person
 file_path = "rooms.json"
 
@@ -16,19 +17,22 @@ def read_file():
 rooms = read_file()
 
 def main():
-    game_start()
+    # game_start()
+    mob_type = random.randint(0, 2)
+    print(mob_type)
 
 def game_start():
+    player = Person("Soja")
     print(f"Welcome to The Game!")
-    print("Menu")
-    print("New Game ('n' or 'N')")
-    print("Saved Game ('s' or 'S')")
-    new_or_saved_game(input("==> "))
+    # print("Menu")
+    # print("New Game ('n' or 'N')")
+    # print("Saved Game ('s' or 'S')")
+    # new_or_saved_game(input("==> "))
+    room_exits("start_room")
 
 def new_or_saved_game(user_input):
     if user_input.lower() == 'n':
         print("New Game loaded")
-        # current_room = "start_room"
         room_exits("start_room")
     elif user_input.lower() == 's':
         print("Saved Game loaded")
@@ -45,14 +49,30 @@ def room_exits(current_room):
 def valid_room(user_input, current_room):
     if user_input in rooms[current_room]["exits"]:
         current_room = rooms[current_room]["exits"][user_input]
-        # print(current_room)
+        if "mobs" in rooms[current_room]:
+            print("MOB")
+            is_mob(rooms[current_room])
+        else: pass 
         room_exits(current_room)
-    # elif user_input == 'm' or 'M':
-    #     player.player_status()
+
+def is_mob(room):
+    mob_type = random.randint(0, 2)
+    print(f"You are about to fight a {room["mobs"][mob_type]}")
+    print("Skipped")
         
-def player_status(user_input, player):
-    if user_input == 'm' or 'M':
-        player.player_status()
+# def player_status(user_input, player):
+#     if user_input == 'm' or 'M':
+#         player.player_status()
+
+# def make_attack():
+    # while player.health > 0:            #This needs to be done so the player(Soja) object is created
+    #     attack_roll = random.randint(1, 20)
+        
+    #     print(f"{attack_roll} vs {player.ac}")
+        
+    #     if attack_roll >= player.ac:
+    #         player.take_damage(2)
+    #     else: print("Attack missed!")
 
 if __name__ == "__main__":
     main()

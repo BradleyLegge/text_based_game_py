@@ -16,12 +16,13 @@
   "ballroom": {
     "description": "You are in the ballroom.",
     "exits": {
-      "north": "boss_room",
+      "north": "room_one",
       "south": "hallway"
     }
   },
   "room_one": {
     "description": "You are in room one.",
+    "mobs": ["goblin", "orc", "kobolds"],
     "exits": {
       "east": "hallway"
     }

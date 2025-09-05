@@ -1,10 +1,10 @@
 class Person():
-    def __init__(self, name):
+    def __init__(self, name, health = 50, base_attack = 2, ac = 14):
         self.name = name
+        self.health = health
+        self.base_attack = base_attack
+        self.ac = ac
         self.inventory = []
-        self.health = 50
-        self.base_attack = 2
-        self.ac = 14
 
     def add_item(self, item):
         self.inventory.append(item)
