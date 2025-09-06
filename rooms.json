@@ -2,35 +2,14 @@
   "start_room": {
     "description": "You are in the starting room",
     "exits": {
-      "north": "hallway"
+      "north": "test_room"
     }
   },
-  "hallway": {
-    "description": "You are in the hallway.",
+  "test_room": {
+    "description": "This is a testing room",
     "exits": {
-      "north": "ballroom",
-      "south": "start_room",
-      "west": "room_one"
-    }
-  },
-  "ballroom": {
-    "description": "You are in the ballroom.",
-    "exits": {
-      "north": "room_one",
-      "south": "hallway"
-    }
-  },
-  "room_one": {
-    "description": "You are in room one.",
-    "mobs": ["goblin", "orc", "kobolds"],
-    "exits": {
-      "east": "hallway"
-    }
-  },
-  "boss_room": {
-    "description": "You are in the bosses room.",
-    "exits": {
-      "south": "ballroom"
-    }
+      "south": "start_room"
+    },
+    "mobs": ["kobald", "orc", "goblin"]
   }
 }

@@ -1,0 +1,31 @@
+{
+"hallway": {
+    "description": "You are in the hallway.",
+    "exits": {
+      "north": "ballroom",
+      "south": "start_room",
+      "west": "room_one"
+    }
+  },
+  "ballroom": {
+    "description": "You are in the ballroom.",
+    "exits": {
+      "north": "room_one",
+      "south": "hallway"
+    }
+  },
+  "room_one": {
+    "description": "You are in room one.",
+    "mobs": ["goblin", "orc", "kobolds"],
+    "exits": {
+      "south": "hallway",
+      "north": "boss_room"
+    }
+  },
+  "boss_room": {
+    "description": "You are in the bosses room.",
+    "exits": {
+      "south": "ballroom"
+    }
+  }
+}

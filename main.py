@@ -16,11 +16,6 @@ def read_file():
 
 rooms = read_file()
 
-def main():
-    # game_start()
-    mob_type = random.randint(0, 2)
-    print(mob_type)
-
 def game_start():
     player = Person("Soja")
     print(f"Welcome to The Game!")
@@ -49,30 +44,43 @@ def room_exits(current_room):
 def valid_room(user_input, current_room):
     if user_input in rooms[current_room]["exits"]:
         current_room = rooms[current_room]["exits"][user_input]
-        if "mobs" in rooms[current_room]:
-            print("MOB")
-            is_mob(rooms[current_room])
-        else: pass 
+        is_mob(current_room)
         room_exits(current_room)
 
-def is_mob(room):
-    mob_type = random.randint(0, 2)
-    print(f"You are about to fight a {room["mobs"][mob_type]}")
-    print("Skipped")
+def is_mob(current_room):
+    if "mobs" in rooms[current_room]:
+        ran_mob = random.randint(0, 2)
+        mob_type = rooms[current_room]["mobs"][ran_mob]
         
-# def player_status(user_input, player):
+        print(f"When you enter the room you see a {mob_type}.")
+        user_input = input("Would you like to fight ('f') it or run ('r')? ==> " )
+
+        if user_input.lower() == 'f':
+            enter_combat()
+        elif user_input.lower() == 'r':
+            pass
+
+    else: pass
+
+def enter_combat():
+    print("You are about to enter combat!")
+        
+# def player_status(user_input, player):    
 #     if user_input == 'm' or 'M':
 #         player.player_status()
 
-# def make_attack():
-    # while player.health > 0:            #This needs to be done so the player(Soja) object is created
-    #     attack_roll = random.randint(1, 20)
+def make_attack(player):
+    while player.health > 0:            #This needs to be done so the player(Soja) object is created
+        attack_roll = random.randint(1, 20)
         
-    #     print(f"{attack_roll} vs {player.ac}")
+        print(f"{attack_roll} vs {player.ac}")
         
-    #     if attack_roll >= player.ac:
-    #         player.take_damage(2)
-    #     else: print("Attack missed!")
+        if attack_roll >= player.ac:
+            player.take_damage(2)
+        else: print("Attack missed!")
+
+def main():
+    game_start()
 
 if __name__ == "__main__":
     main()
