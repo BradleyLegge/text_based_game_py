@@ -97,45 +97,36 @@ def make_attack(player):
     print(f"{player.name} rolled a {player_init} initiative roll.")
     print("")
 
+    player_turn_first = player_init > mob_init
+
     while player.health > 0 and mob.health > 0:
 
-        if mob_init > player_init:
-            attack_roll = random.randint(1, 20)
-            print(f"The {mob.name} rolled a {attack_roll} against your AC of {player.ac}")
-            if attack_roll >= player.ac:
-                player.take_damage(mob.base_attack)
-            else: print("Attack missed!\n")
-
+        if player_turn_first:
+            player_attack(player, mob)
             if player.health <= 0:
                 break
+            mob_attack(mob, player)
+        else:
+            mob_attack(mob, player)
+            if mob.health <= 0:
+                break
+            player_attack(player, mob)
 
-            attack = input("Type roll to make an attack: ==> ")
-            if attack == "roll":
-                attack_roll = random.randint(1, 20)
-                print(f"You rolled a {attack_roll} against the AC of {mob.ac}")
-                if attack_roll >= mob.ac:
-                    mob.take_damage(player.base_attack)
-                else: print("Attack missed!\n")
-            elif attack == "special":
-                pass
-        elif player_init > mob_init:
-            attack = input("Type roll to make an attack: ==> ")
-            if attack == "roll":
-                attack_roll = random.randint(1, 20)
-                print(f"You rolled a {attack_roll} against the AC of {mob.ac}")
-                if attack_roll >= mob.ac:
-                    mob.take_damage(player.base_attack)
-                else: print("Attack missed!\n")
+def mob_attack(mob, player):
+    attack_roll = random.randint(1, 20)
+    print(f"The {mob.name} rolled a {attack_roll} against your AC of {player.ac}")
+    if attack_roll >= player.ac:
+        player.take_damage(mob.base_attack)
+    else: print("Attack missed!\n")
 
-                if mob.health <= 0:
-                    break
-
-            attack_roll = random.randint(1, 20)
-            print(f"The {mob.name} rolled a {attack_roll} against your AC of {player.ac}")
-            if attack_roll >= player.ac:
-                player.take_damage(mob.base_attack)
-            else: print("Attack missed!\n")
-
+def player_attack(player, mob):
+    attack = input("Type roll to make an attack: ==> ")
+    if attack == "roll":
+        attack_roll = random.randint(1, 20)
+        print(f"You rolled a {attack_roll} against the AC of {mob.ac}")
+        if attack_roll >= mob.ac:
+            mob.take_damage(player.base_attack)
+        else: print("Attack missed!\n")
 
 def kill_switch(player):
     player.health = 0
