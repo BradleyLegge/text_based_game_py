@@ -1,5 +1,5 @@
 class Person():
-    def __init__(self, name, health = 50, base_attack = 2, ac = 14):
+    def __init__(self, name, health = 10, base_attack = 2, ac = 14):
         self.name = name
         self.health = health
         self.base_attack = base_attack

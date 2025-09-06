@@ -29,13 +29,14 @@ def game_start():
     while player.health > 0: #or boss.health > 0
         print("What would you like to do? ('m' for menu)")
         user_input = input("==> ")
+        print(" ")
         
         if user_input.lower() == 'move':
             current_room = display_room(current_room)
         elif user_input.lower()== 'loot':
             pass
         elif user_input.lower() == 'fight':
-            pass
+            make_attack(player)
         elif user_input.lower() == 'run':
             pass
         elif user_input.lower() == 'menu':
@@ -51,17 +52,19 @@ def menu():
     print("To search the room for loot type: 'loot'")
     print("To fight a mob you encounter type: 'fight'")
     print("To retreat or avoid an encounter type: 'run'")
-    print("To view your player status type: 'status' ")
+    print("To view your player status type: 'status'")
 
 def display_room(current_room):
     print(rooms[current_room]["description"])
     print(f"There are the exits: {" ".join(rooms[current_room]["exits"].keys())}")
     print("Where would you like to move? ")
     user_direction = input("==> ")
+    print(" ")
     
     if user_direction in rooms[current_room]["exits"]:
         current_room = rooms[current_room]["exits"][user_direction]
-        print(f"You have moved to the {current_room}")  
+        print(f"You have moved to the {current_room}")
+        is_mob(current_room)
     else: print("You cannot move there.")
 
     return current_room
@@ -72,14 +75,14 @@ def is_mob(current_room):
         mob_type = rooms[current_room]["mobs"][ran_mob]
         
         print(f"When you enter the room you see a {mob_type}.")
-        user_input = input("Would you like to fight ('f') it or run ('r')? ==> " )
+    #     user_input = input("Would you like to fight ('f') it or run ('r')? ==> " )
 
-        if user_input.lower() == 'f':
-            enter_combat()
-        elif user_input.lower() == 'r':
-            pass
+    #     if user_input.lower() == 'f':
+    #         enter_combat
+    #     elif user_input.lower() == 'r':
+    #         pass
 
-    else: pass
+    # else: pass
 
 def enter_combat():
     print("You are about to enter combat!")
@@ -89,13 +92,17 @@ def player_status(player):
 
 def make_attack(player):
     while player.health > 0:            #This needs to be done so the player(Soja) object is created
-        attack_roll = random.randint(1, 20)
+        attack = input("Type roll to make an attack: ==> ")
         
-        print(f"{attack_roll} vs {player.ac}")
+        if attack == "roll":
+            attack_roll = random.randint(1, 20)
+            print(f"You rolled a {attack_roll} against the AC of {player.ac}")
+            if attack_roll >= player.ac:
+                player.take_damage(player.base_attack)
+            else: print("Attack missed!")
+        elif attack == "special":
+            pass
         
-        if attack_roll >= player.ac:
-            player.take_damage(2)
-        else: print("Attack missed!")
 
 def kill_switch(player):
     player.health = 0
