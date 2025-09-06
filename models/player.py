@@ -16,6 +16,7 @@ class Person():
             print(f"{self.name} has been defeated")
         else:
             print(f"{self.name} has taken {amount} of damage, health is now {self.health}")
+            print("")
 
     def player_status(self):
         print(f"Player name: {self.name}")

@@ -9,7 +9,6 @@
     "description": "This is a testing room",
     "exits": {
       "south": "start_room"
-    },
-    "mobs": ["kobald", "orc", "goblin"]
+    }
   }
 }

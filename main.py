@@ -1,6 +1,7 @@
 import json
 import random
 from models.player import Person
+from models.goblin import Goblin
 file_path = "rooms.json"
 
 def read_file():
@@ -33,8 +34,8 @@ def game_start():
         
         if user_input.lower() == 'move':
             current_room = display_room(current_room)
-        elif user_input.lower()== 'loot':
-            pass
+        elif user_input.lower()== 'search':
+            search()
         elif user_input.lower() == 'fight':
             make_attack(player)
         elif user_input.lower() == 'run':
@@ -64,45 +65,77 @@ def display_room(current_room):
     if user_direction in rooms[current_room]["exits"]:
         current_room = rooms[current_room]["exits"][user_direction]
         print(f"You have moved to the {current_room}")
-        is_mob(current_room)
     else: print("You cannot move there.")
 
     return current_room
 
-def is_mob(current_room):
-    if "mobs" in rooms[current_room]:
-        ran_mob = random.randint(0, 2)
-        mob_type = rooms[current_room]["mobs"][ran_mob]
+def search():
+    room_search = random.randint(1, 3)
+    if room_search == 1:
+        print("There is something moving about in this room!")
+    elif room_search == 2:
+        print("You see something shiny laying on the desk!")
+    elif room_search == 3:
+        print("The room is completely empty")
+
+# def is_mob(current_room):
+#     if "mobs" in rooms[current_room]:
+#         ran_mob = random.randint(0, 2)
+#         mob_type = rooms[current_room]["mobs"][ran_mob]
         
-        print(f"When you enter the room you see a {mob_type}.")
-    #     user_input = input("Would you like to fight ('f') it or run ('r')? ==> " )
+#         print(f"When you enter the room you see a {mob_type}.")
 
-    #     if user_input.lower() == 'f':
-    #         enter_combat
-    #     elif user_input.lower() == 'r':
-    #         pass
-
-    # else: pass
-
-def enter_combat():
-    print("You are about to enter combat!")
-        
 def player_status(player):
     player.player_status()
 
 def make_attack(player):
-    while player.health > 0:            #This needs to be done so the player(Soja) object is created
-        attack = input("Type roll to make an attack: ==> ")
-        
-        if attack == "roll":
+    mob_types = [Goblin]
+    mob = random.choice(mob_types)()
+    mob_init = random.randint(1, 20)
+    player_init = random.randint(1, 20)
+    print(f"The {mob.name} rolled a {mob_init} initiative roll.")
+    print(f"{player.name} rolled a {player_init} initiative roll.")
+    print("")
+
+    while player.health > 0 and mob.health > 0:
+
+        if mob_init > player_init:
             attack_roll = random.randint(1, 20)
-            print(f"You rolled a {attack_roll} against the AC of {player.ac}")
+            print(f"The {mob.name} rolled a {attack_roll} against your AC of {player.ac}")
             if attack_roll >= player.ac:
-                player.take_damage(player.base_attack)
-            else: print("Attack missed!")
-        elif attack == "special":
-            pass
-        
+                player.take_damage(mob.base_attack)
+            else: print("Attack missed!\n")
+
+            if player.health <= 0:
+                break
+
+            attack = input("Type roll to make an attack: ==> ")
+            if attack == "roll":
+                attack_roll = random.randint(1, 20)
+                print(f"You rolled a {attack_roll} against the AC of {mob.ac}")
+                if attack_roll >= mob.ac:
+                    mob.take_damage(player.base_attack)
+                else: print("Attack missed!\n")
+            elif attack == "special":
+                pass
+        elif player_init > mob_init:
+            attack = input("Type roll to make an attack: ==> ")
+            if attack == "roll":
+                attack_roll = random.randint(1, 20)
+                print(f"You rolled a {attack_roll} against the AC of {mob.ac}")
+                if attack_roll >= mob.ac:
+                    mob.take_damage(player.base_attack)
+                else: print("Attack missed!\n")
+
+                if mob.health <= 0:
+                    break
+
+            attack_roll = random.randint(1, 20)
+            print(f"The {mob.name} rolled a {attack_roll} against your AC of {player.ac}")
+            if attack_roll >= player.ac:
+                player.take_damage(mob.base_attack)
+            else: print("Attack missed!\n")
+
 
 def kill_switch(player):
     player.health = 0
