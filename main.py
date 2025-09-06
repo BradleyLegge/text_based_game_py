@@ -1,7 +1,7 @@
 import json
 import random
 from models.player import Person
-from models.goblin import Goblin
+from models.mobs import Goblin, Kobald, Orc
 file_path = "rooms.json"
 
 def read_file():
@@ -38,8 +38,6 @@ def game_start():
             search()
         elif user_input.lower() == 'fight':
             make_attack(player)
-        elif user_input.lower() == 'run':
-            pass
         elif user_input.lower() == 'menu':
             menu()
         elif user_input.lower() == 'status':
@@ -78,18 +76,11 @@ def search():
     elif room_search == 3:
         print("The room is completely empty")
 
-# def is_mob(current_room):
-#     if "mobs" in rooms[current_room]:
-#         ran_mob = random.randint(0, 2)
-#         mob_type = rooms[current_room]["mobs"][ran_mob]
-        
-#         print(f"When you enter the room you see a {mob_type}.")
-
 def player_status(player):
     player.player_status()
 
 def make_attack(player):
-    mob_types = [Goblin]
+    mob_types = [Goblin, Kobald, Orc]
     mob = random.choice(mob_types)()
     mob_init = random.randint(1, 20)
     player_init = random.randint(1, 20)
