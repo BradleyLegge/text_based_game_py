@@ -17,6 +17,9 @@ def read_file():
 rooms = read_file()
 
 def game_start():
+    print("Welcome to The Game!")
+    print("Search through the rooms, collecting loot and seeking the Boss.")
+    print("Defeat the Boss and claim the title as Dungeon Master!")
     player_name = input("Enter your character name: ==> ")
     player = Person(player_name)
     current_room = "start_room"
@@ -24,57 +27,44 @@ def game_start():
     menu()
 
     while player.health > 0: #or boss.health > 0
-        print(current_room)
+        print("What would you like to do? ('m' for menu)")
         user_input = input("==> ")
         
-        if user_input == 'move':
-            display_room(current_room)
-        elif user_input == 'loot':
+        if user_input.lower() == 'move':
+            current_room = display_room(current_room)
+        elif user_input.lower()== 'loot':
             pass
-        elif user_input == 'fight':
+        elif user_input.lower() == 'fight':
             pass
-        elif user_input == 'run':
+        elif user_input.lower() == 'run':
             pass
-        elif user_input == 'menu':
-            pass
-        elif user_input == "status":
-            pass
-        elif user_input == "kill":
+        elif user_input.lower() == 'menu':
+            menu()
+        elif user_input.lower() == 'status':
+            player_status(player)
+        elif user_input.lower() == 'kill':
             kill_switch(player)
         else: print("You entered a wrong command!")
 
 def menu():
-    print("Welcome to The Game!")
-    print("Search through the rooms, collecting loot and seeking the Boss.")
-    print("Defeat the Boss and claim the title as Dungeon Master!")
     print("To move from room to room type: 'move'")
     print("To search the room for loot type: 'loot'")
     print("To fight a mob you encounter type: 'fight'")
     print("To retreat or avoid an encounter type: 'run'")
-    print("What would you like to do?")
-
+    print("To view your player status type: 'status' ")
 
 def display_room(current_room):
     print(rooms[current_room]["description"])
     print(f"There are the exits: {" ".join(rooms[current_room]["exits"].keys())}")
     print("Where would you like to move? ")
-    user_input = input("==> ")
-    is_valid_room(user_input, current_room)
-
-
-# def room_exits(current_room):        
+    user_direction = input("==> ")
     
-    
-#     print("Where would you like to go?")
-#     user_input = input("==> ")
-#     valid_room(user_input, current_room)
-
-def is_valid_room(user_input, current_room):
-    if user_input in rooms[current_room]["exits"]:
-        print("You can move there.")
-        current_room = rooms[current_room]["exits"][user_input]
-        print(current_room)
+    if user_direction in rooms[current_room]["exits"]:
+        current_room = rooms[current_room]["exits"][user_direction]
+        print(f"You have moved to the {current_room}")  
     else: print("You cannot move there.")
+
+    return current_room
 
 def is_mob(current_room):
     if "mobs" in rooms[current_room]:
@@ -94,9 +84,8 @@ def is_mob(current_room):
 def enter_combat():
     print("You are about to enter combat!")
         
-# def player_status(user_input, player):    
-#     if user_input == 'm' or 'M':
-#         player.player_status()
+def player_status(player):
+    player.player_status()
 
 def make_attack(player):
     while player.health > 0:            #This needs to be done so the player(Soja) object is created

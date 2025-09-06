@@ -20,4 +20,4 @@ class Person():
     def player_status(self):
         print(f"Player name: {self.name}")
         print(f"{self.name}'s health is: {self.health}")
-        print(f"{self.name}'s inventory: {" ".join(self.inventory) if self.inventory else "empty"}")
+        print(f"{self.name}'s inventory: {' '.join(self.inventory) if self.inventory else 'empty'}")
