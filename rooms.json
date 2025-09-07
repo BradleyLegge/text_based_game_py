@@ -2,13 +2,41 @@
   "start_room": {
     "description": "You are in the starting room",
     "exits": {
-      "north": "test_room"
+      "north": "hallway"
     }
   },
-  "test_room": {
-    "description": "This is a testing room",
+  "hallway": {
+    "description": "You are in the hallway.",
     "exits": {
-      "south": "start_room"
+      "north": "ballroom",
+      "south": "start_room",
+      "east": "room_two",
+      "west": "room_one"
+    }
+  },
+  "room_one": {
+    "description": "You are in room one.",
+    "exits": {
+      "east": "hallway"
+    }
+  },
+  "room_two": {
+    "description": "You are in room two.",
+    "exits": {
+      "west": "hallway"
+    }
+  },
+  "ballroom": {
+    "description": "You are in the ballroom.",
+    "exits": {
+      "north": "boss_room",
+      "south": "hallway"
+    }
+  },
+  "boss_room": {
+    "description": "You are in the bosses room.",
+    "exits": {
+      "south": "ballroom"
     }
   }
 }

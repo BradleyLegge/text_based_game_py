@@ -38,7 +38,7 @@ def game_start():
             search()
         elif user_input.lower() == 'fight':
             make_attack(player)
-        elif user_input.lower() == 'menu':
+        elif user_input.lower() == 'menu' or 'm':
             menu()
         elif user_input.lower() == 'status':
             player_status(player)
@@ -48,9 +48,9 @@ def game_start():
 
 def menu():
     print("To move from room to room type: 'move'")
-    print("To search the room for loot type: 'loot'")
+    print("To search the room type: 'search'")
     print("To fight a mob you encounter type: 'fight'")
-    print("To retreat or avoid an encounter type: 'run'")
+    print("To view the menu type: 'menu'")
     print("To view your player status type: 'status'")
 
 def display_room(current_room):
@@ -75,9 +75,6 @@ def search():
         print("You see something shiny laying on the desk!")
     elif room_search == 3:
         print("The room is completely empty")
-
-def player_status(player):
-    player.player_status()
 
 def make_attack(player):
     mob_types = [Goblin, Kobald, Orc]
@@ -121,6 +118,9 @@ def player_attack(player, mob):
 
 def kill_switch(player):
     player.health = 0
+
+def player_status(player):
+    player.player_status()
 
 def main():
     game_start()
