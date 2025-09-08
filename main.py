@@ -119,7 +119,6 @@ def player_attack(player, mob):
             mob.take_damage(player.base_attack)
         else: print("Attack missed!\n")
 
-
 def kill_switch(player):
     player.health = 0
 
